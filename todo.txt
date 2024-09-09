@@ -1,0 +1,6 @@
+- get moves by category 
+- post move
+- get one move
+- add to favList
+- remove from favList
+- get favList
