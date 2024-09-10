@@ -10,8 +10,8 @@ const createNewMovie = async (movie) => {
     }
 }
 
-const findMovieById = async (id)=>{
-    try{
+const findMovieById = async (id) => {
+    try {
         const movie = await Movie.findById(id);
         return movie;
     } catch (error) {
@@ -19,16 +19,30 @@ const findMovieById = async (id)=>{
     }
 }
 
-const findMovieByQuery = async (query)=>{
-    try{
+const findMovieByQuery = async (query) => {
+    try {
         const movies = await Movie.find(query);
         return movies;
     } catch (error) {
         throw error;
     }
 }
+
+const updateMovieRate = async(movieId, rate) => {
+    try {
+        const movie = await Movie.findMovieById(id);
+        movie.rating.count++;
+        movie.rating.sum += rete;
+        movie.save();
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 module.exports = {
     createNewMovie,
     findMovieById,
-    findMovieByQuery
+    findMovieByQuery,
+    updateMovieRate
 }

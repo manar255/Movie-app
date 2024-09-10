@@ -23,7 +23,11 @@ const MovieSchema = new mongoose.Schema({
         required:true
     },
     rating:{
-        type:Number,
+        type:{
+            count:{type:Number,default:0},
+            sum:{type:Number,default:0}
+
+        },
         default:0
     }
 }, {

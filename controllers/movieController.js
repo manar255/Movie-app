@@ -47,9 +47,9 @@ const getAllMovies = async (req, res, next) => {
 }
 const getMoviesByCategory = async (req, res, next) => {
     try {
-        const {category} = req.params;
+        const { category } = req.params;
 
-        const movies = await movieService.findMovieByQuery({category});
+        const movies = await movieService.findMovieByQuery({ category });
 
         //return respose
         res.status(200).json({ movies, message: 'get movies by category done' });
@@ -79,10 +79,48 @@ const getOneMovie = async (req, res, next) => {
 
 }
 
+const addRateToMovie = async (req, res, next) => {
+    try {
+
+        const { id } = req.params;
+        const { rate } = req.body;
+
+        await movieService.updateMovieRate(id,rate);
+
+        //return respose
+        res.status(200).json({ message: 'your rate added successfully' });
+
+    } catch (err) {
+        console.error('Error add movie rate');
+        next(err);
+    }
+
+}
+
+const addMoveiToFavList = async (req, res, next) => {
+    try {
+
+        const movieId = req.params.id;
+        const { userId } = req.userId;
+
+
+        await movieService.addMoveiToFavList(movieId,userId);
+
+        //return respose
+        res.status(200).json({message:"the movie added to favorite list"});
+        
+    } catch (err) {
+        console.error('Error add movie rate');
+        next(err);
+    }
+
+}
 
 module.exports = {
     addMovie,
     getAllMovies,
     getOneMovie,
-    getMoviesByCategory
+    getMoviesByCategory,
+    addRateToMovie,
+    addMoveiToFavList
 }

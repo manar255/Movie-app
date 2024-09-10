@@ -23,7 +23,11 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    favMovies:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Movie'
+    }]
 
 }, {
     timestamps: true

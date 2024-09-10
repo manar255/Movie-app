@@ -1,7 +1,7 @@
-- get movies by category 
-- post movie
-- get one movie
-- rate movie
+- get movies by category (done :))
+- post movie [actors] (done :))
+- get one movie (done :))
+- rate movie (done :))
 - add to favList
 - remove from favList
 - get favList
