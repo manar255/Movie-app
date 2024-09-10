@@ -1,6 +1,7 @@
-- get moves by category 
-- post move
-- get one move
+- get movies by category 
+- post movie
+- get one movie
+- rate movie
 - add to favList
 - remove from favList
 - get favList

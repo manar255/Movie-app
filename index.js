@@ -5,6 +5,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 
 const authRouter = require('./routers/authRouter')
+const movieRouter = require('./routers/movieRouter')
 
 const app = express()
 
@@ -30,6 +31,8 @@ const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSW
 
 
 app.use('/auth', authRouter)
+app.use('/movie', movieRouter)
+
 
 
 
