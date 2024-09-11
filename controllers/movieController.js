@@ -61,6 +61,7 @@ const getMoviesByCategory = async (req, res, next) => {
     }
 
 }
+
 const getOneMovie = async (req, res, next) => {
     try {
 
@@ -96,6 +97,7 @@ const addRateToMovie = async (req, res, next) => {
     }
 
 }
+
 
 const addMoveiToFavList = async (req, res, next) => {
     try {

@@ -4,13 +4,11 @@ const addMoveiToFavList = async (req, res, next) => {
     try {
 
         const movieId = req.params.id;
-        const { userId } = req.userId;
+        const userId  = req.userId;
 
-
-        await userService.addMoveiToFavList(movieId, userId);
-
+        const msg = await userService.addMoveiToFavList(movieId, userId);
         //return respose
-        res.status(200).json({ message: "the movie added to favorite list" });
+        res.status(200).json({ message: msg });
 
     } catch (err) {
         console.error('Error add movie rate');
@@ -21,7 +19,7 @@ const addMoveiToFavList = async (req, res, next) => {
 
 const getFavList = async (req, res, next) => {
     try {
-        const { userId } = req.userId;
+        const userId  = req.userId;
         const favList = await userService.getFavList(userId);
         res.status(200).json({ favList });
     } catch (err) {

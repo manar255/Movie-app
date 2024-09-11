@@ -21,7 +21,8 @@ const findMovieById = async (id) => {
 
 const findMovieByQuery = async (query) => {
     try {
-        const movies = await Movie.find(query);
+        console.log(query)
+        const movies = await Movie.find(query).exec();
         return movies;
     } catch (error) {
         throw error;
@@ -30,15 +31,14 @@ const findMovieByQuery = async (query) => {
 
 const updateMovieRate = async(movieId, rate) => {
     try {
-        const movie = await Movie.findMovieById(id);
+        const movie = await findMovieById(movieId);
         movie.rating.count++;
-        movie.rating.sum += rete;
+        movie.rating.sum += parseInt(rate);
         movie.save();
     } catch (error) {
         throw error;
     }
 }
-
 
 module.exports = {
     createNewMovie,
