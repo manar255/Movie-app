@@ -2,6 +2,12 @@
 - post movie [actors] (done :))
 - get one movie (done :))
 - rate movie (done :))
-- add to favList
-- remove from favList
-- get favList
+- add to favList (done)
+- remove from favList =>done
+- get favList=>done
+
+- google auth
+- get user info
+- actors data
+- add more category
+

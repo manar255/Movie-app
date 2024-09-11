@@ -9,6 +9,9 @@ const MovieSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    data:{
+        type:Date
+    },
     category: {
         type: String,
         required: true,
@@ -27,7 +30,7 @@ const MovieSchema = new mongoose.Schema({
             count: { type: Number, default: 0 },
             sum: { type: Number, default: 0 }
         },
-        default: { count: 0, sum: 0 }
+        default: { count: 1, sum: 5 }
     }
 }, {
     timestamps: true

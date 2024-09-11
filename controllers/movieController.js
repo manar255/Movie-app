@@ -28,12 +28,12 @@ const addMovie = async (req, res, next) => {
 
 const getAllMovies = async (req, res, next) => {
     try {
-        const limit = parseInt(req.query.limit) || 9;
+        const limit = parseInt(req.query.limit) || undefined;
         const page = parseInt(req.query.page) || 1;
 
-        const skip = (page - 1) * limit;
+        
 
-        const movies = await Movie.find().limit(limit).skip(skip);
+        const movies = await movieService.getAllMovies(limit,page);
 
         //return respose
         res.status(200).json({ movies, message: 'get all movies done' });

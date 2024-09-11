@@ -13,12 +13,20 @@ const createNewMovie = async (movie) => {
 const findMovieById = async (id) => {
     try {
         const movie = await Movie.findById(id);
-        return movie;
+        return {...movie._doc,rating:(movie._doc.rating.sum/movie._doc.rating.count)};
     } catch (error) {
         throw error;
     }
 }
 
+const getAllMovies = async (limit, page) => {
+    try {
+        const skip = (page - 1) * limit;
+        return await Movie.find().select('name date image description').limit(limit).skip(skip);
+    } catch (error) {
+        throw error;
+    }
+}
 const findMovieByQuery = async (query) => {
     try {
         console.log(query)
@@ -29,9 +37,9 @@ const findMovieByQuery = async (query) => {
     }
 }
 
-const updateMovieRate = async(movieId, rate) => {
+const updateMovieRate = async (movieId, rate) => {
     try {
-        const movie = await findMovieById(movieId);
+        const movie = await Movie.findById(movieId);
         movie.rating.count++;
         movie.rating.sum += parseInt(rate);
         movie.save();
@@ -44,5 +52,6 @@ module.exports = {
     createNewMovie,
     findMovieById,
     findMovieByQuery,
-    updateMovieRate
+    updateMovieRate,
+    getAllMovies
 }
