@@ -1,4 +1,5 @@
 const Movie = require('../models/Movie');
+const {uploadImage} = require('../services/cloudinary')
 const movieService = require('../services/movieService')
 
 const addMovie = async (req, res, next) => {
@@ -8,7 +9,7 @@ const addMovie = async (req, res, next) => {
         // create new movie
         const movie = await movieService.createNewMovie({
             title,
-            image:file.path,
+            image:await uploadImage(file.path,"Movie"),
             data,
             overview,
             isReleased:isReleased==="true"?true:false,
