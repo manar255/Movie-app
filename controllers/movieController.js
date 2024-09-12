@@ -3,16 +3,25 @@ const movieService = require('../services/movieService')
 
 const addMovie = async (req, res, next) => {
     try {
-        const { name, image, languadge, category, description, directorName } = req.body;
-
+        const { title, data, overview, isReleased, isAdult, original_language, tagline, genres, production_companies, production_countries, spoken_languages, keywords, vote_average, vote_count } = req.body;
+        const file = req.file;
         // create new movie
         const movie = await movieService.createNewMovie({
-            name,
-            description,
-            category,
-            image,
-            languadge,
-            directorName,
+            title,
+            image:file.path,
+            data,
+            overview,
+            isReleased:isReleased==="true"?true:false,
+            isAdult:isAdult==="true"?true:false,
+            original_language,
+            tagline,
+            genres,
+            production_companies,
+            production_countries,
+            spoken_languages,
+            keywords,
+            vote_average,
+            vote_count
         });
 
         //return respose
@@ -31,9 +40,9 @@ const getAllMovies = async (req, res, next) => {
         const limit = parseInt(req.query.limit) || undefined;
         const page = parseInt(req.query.page) || 1;
 
-        
 
-        const movies = await movieService.getAllMovies(limit,page);
+
+        const movies = await movieService.getAllMovies(limit, page);
 
         //return respose
         res.status(200).json({ movies, message: 'get all movies done' });
@@ -86,7 +95,7 @@ const addRateToMovie = async (req, res, next) => {
         const { id } = req.params;
         const { rate } = req.body;
 
-        await movieService.updateMovieRate(id,rate);
+        await movieService.updateMovieRate(id, rate);
 
         //return respose
         res.status(200).json({ message: 'your rate added successfully' });
@@ -106,11 +115,11 @@ const addMoveiToFavList = async (req, res, next) => {
         const { userId } = req.userId;
 
 
-        await movieService.addMoveiToFavList(movieId,userId);
+        await movieService.addMoveiToFavList(movieId, userId);
 
         //return respose
-        res.status(200).json({message:"the movie added to favorite list"});
-        
+        res.status(200).json({ message: "the movie added to favorite list" });
+
     } catch (err) {
         console.error('Error add movie rate');
         next(err);

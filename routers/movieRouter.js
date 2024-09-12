@@ -4,8 +4,10 @@ const router = express.Router()
 
 const movieController = require('../controllers/movieController');
 
+const uploadFile = require('../meddleware/uploadFile')
 
-router.post('/',movieController.addMovie )
+
+router.post('/',uploadFile.single('file'),movieController.addMovie )
 router.get('/movies',movieController.getAllMovies )
 router.get('/category/:category',movieController.getMoviesByCategory)
 router.get('/:id',movieController.getOneMovie)
