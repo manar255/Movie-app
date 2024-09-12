@@ -10,4 +10,8 @@
 - get user info
 - actors data
 - add more category
+- update rateing system
+- array data in post new movie
+- cloudanry service
+
 
