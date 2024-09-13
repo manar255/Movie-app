@@ -22,7 +22,7 @@ const findMovieById = async (id) => {
 const getAllMovies = async (limit, page) => {
     try {
         const skip = (page - 1) * limit;
-        return await Movie.find().select('name date image description').limit(limit).skip(skip);
+        return await Movie.find().limit(limit).skip(skip);
     } catch (error) {
         throw error;
     }
