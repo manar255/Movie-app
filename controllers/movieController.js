@@ -4,23 +4,23 @@ const movieService = require('../services/movieService')
 
 const addMovie = async (req, res, next) => {
     try {
-        const { title, data, overview, isReleased, isAdult, original_language, tagline, genres, production_companies, production_countries, spoken_languages, keywords, vote_average, vote_count } = req.body;
+        const { title, date, overview, isReleased, isAdult, original_language, tagline, genres, production_companies, production_countries, spoken_languages, keywords, vote_average, vote_count } = req.body;
         const file = req.file;
         // create new movie
         const movie = await movieService.createNewMovie({
             title,
             image:await uploadImage(file.path,"Movie"),
-            data,
+            date,
             overview,
             isReleased:isReleased==="true"?true:false,
             isAdult:isAdult==="true"?true:false,
             original_language,
             tagline,
             genres,
-            production_companies,
-            production_countries,
-            spoken_languages,
-            keywords,
+            production_companies:JSON.parse(production_companies),
+            production_countries:JSON.parse(production_countries),
+            spoken_languages:JSON.parse(spoken_languages),
+            keywords:JSON.parse(spoken_languages),
             vote_average,
             vote_count
         });
