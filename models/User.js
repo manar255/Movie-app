@@ -30,6 +30,10 @@ const UserSchema = new mongoose.Schema({
     favMovies:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Movie'
+    }],
+    watctLater:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Movie'
     }]
 
 }, {
