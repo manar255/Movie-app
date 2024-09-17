@@ -75,7 +75,7 @@ const googlelogin = async (req, res, next) => {
   } catch (error) {
     console.error('Error signing in with Google:', error);
     res.status(401).json(
-      { message: 'Error signing in with Google' }
+      { message: error.message }
     );
   }
 
