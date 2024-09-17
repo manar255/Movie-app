@@ -3,8 +3,8 @@ const userService = require('../services/userService')
 const getUserData = async(req, res, next) => {
     try {
         const userId  = req.userId;
-        const favList = await userService.getUserData(userId);
-        res.status(200).json({ favList });
+        const user = await userService.getUserData(userId);
+        res.status(200).json(user);
     } catch (err) {
         console.error('Error get fav list');
         next(err);
