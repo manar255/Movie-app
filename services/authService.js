@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require('google-auth-library');
 
 const createUser = async (userData) => {
     try {
@@ -18,6 +19,7 @@ const createUser = async (userData) => {
         })
         //save user
         await user.save();
+        return user;
 
     } catch (error) {
         throw error;
@@ -51,10 +53,25 @@ const generateToken = (data) => {
     }
 }
 
+const getGoogleUserData = async (token) => {
+    try {
+        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        return payload;
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 module.exports = {
     createUser,
     findUser,
     comparePassword,
-    generateToken
+    generateToken,
+    getGoogleUserData
 }
