@@ -1,5 +1,14 @@
 const User = require("../models/User");
 
+
+const getUserData= async (id) => {
+    try {
+        const user = await User.findById(id ,"firstName lastName email image");
+        return user;
+    } catch (error) {
+        throw error;
+    }
+}
 const addMoveiToFavList = async (movieId, userId) => {
     try {
         const user = await User.findById(userId);
@@ -41,4 +50,5 @@ module.exports = {
     addMoveiToFavList,
     getFavList,
     // removeFromFavList
+    getUserData
 }

@@ -46,7 +46,7 @@ const getAllMovies = async (req, res, next) => {
         const movies = await movieService.getAllMovies(limit, page);
 
         //return respose
-        res.status(200).json({ movies, message: 'get all movies done' });
+        res.status(200).json( movies);
     } catch (err) {
 
         console.error('Error get all movies:');
@@ -62,7 +62,7 @@ const getMoviesByCategory = async (req, res, next) => {
         const movies = await movieService.findMovieByQuery({ category });
 
         //return respose
-        res.status(200).json({ movies, message: 'get movies by category done' });
+        res.status(200).json( movies);
     } catch (err) {
 
         console.error('Error get all movies by category:');
@@ -80,7 +80,7 @@ const getOneMovie = async (req, res, next) => {
         const movie = await movieService.findMovieById(id);
 
         //return respose
-        res.status(200).json({ movie, message: 'get one movie' });
+        res.status(200).json(movie);
     } catch (err) {
 
         console.error('Error get all movies:');
