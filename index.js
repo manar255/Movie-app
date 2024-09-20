@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 const authRouter = require('./routers/authRouter')
 const movieRouter = require('./routers/movieRouter')
-const userRouter =require('./routers/userRouter')
+const userRouter = require('./routers/userRouter')
 
 const app = express()
 
@@ -36,6 +36,14 @@ app.use('/auth', authRouter)
 app.use('/movie', movieRouter)
 app.use('/user', userRouter)
 
+
+//Error handling 
+app.use((error, req, res, next) => {
+    console.error(error);
+    const status = error.status || 500;
+    const message = error.message || 'Internal Server Error';
+    res.status(status).json({ message });
+});
 
 
 

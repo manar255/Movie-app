@@ -8,7 +8,9 @@ const createUser = async (userData) => {
         //chick if user is exist
         const oldUser = await User.findOne({ email: userData.email });
         if (oldUser) {
-            throw new Error('Email is already in use');
+            let err = new Error('Email is already in use');
+            err.status = 400;
+            throw err;
         }
         //hash password
         const hashedPassword = await bcrypt.hash(userData.password, 10);
