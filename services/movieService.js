@@ -27,10 +27,10 @@ const getAllMovies = async (limit, page) => {
         throw error;
     }
 }
-const findMovieByQuery = async (query) => {
+const findMovieByQuery = async (query,limit,page) => {
     try {
-        console.log(query)
-        const movies = await Movie.find(query).exec();
+        const skip = (page - 1) * limit;
+        const movies = await Movie.find(query).limit(limit).skip(skip).exec();
         return movies;
     } catch (error) {
         throw error;

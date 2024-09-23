@@ -1,3 +1,4 @@
+const { json } = require('body-parser');
 const Movie = require('../models/Movie');
 const {uploadImage} = require('../services/cloudinary')
 const movieService = require('../services/movieService')
@@ -58,11 +59,13 @@ const getAllMovies = async (req, res, next) => {
 const getMoviesByCategory = async (req, res, next) => {
     try {
         const { category } = req.params;
+        const limit = parseInt(req.query.limit) || undefined;
+        const page = parseInt(req.query.page) || 1;
 
-        const movies = await movieService.findMovieByQuery({ category });
+        const movies = await movieService.findMovieByQuery({ genres: { $in: [category] } },limit,page);
 
         //return respose
-        res.status(200).json( movies);
+        res.status(200).json( {length:movies.length,movies  });
     } catch (err) {
 
         console.error('Error get all movies by category:');
@@ -128,11 +131,31 @@ const addMoveiToFavList = async (req, res, next) => {
 
 }
 
+// const editMovieGenre = async (req, res, next) => {
+//     try {
+
+//        const movies = await Movie.find();
+//        const newArr = movies.map((movie)=>{
+//         movie.genres = JSON.parse(movie.genres[0])
+//         movie.save()
+//         return movie;
+//        })
+//         //return respose
+//         res.status(200).json( newArr );
+
+//     } catch (err) {
+//         console.error('Error add movie rate');
+//         next(err);
+//     }
+
+// }
+
 module.exports = {
     addMovie,
     getAllMovies,
     getOneMovie,
     getMoviesByCategory,
     addRateToMovie,
-    addMoveiToFavList
+    addMoveiToFavList,
+    // editMovieGenre
 }
