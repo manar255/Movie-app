@@ -1,8 +1,8 @@
 const userService = require('../services/userService')
 
-const getUserData = async(req, res, next) => {
+const getUserData = async (req, res, next) => {
     try {
-        const userId  = req.userId;
+        const userId = req.userId;
         const user = await userService.getUserData(userId);
         res.status(200).json(user);
     } catch (err) {
@@ -16,7 +16,7 @@ const addMoveiToFavList = async (req, res, next) => {
     try {
 
         const movieId = req.params.id;
-        const userId  = req.userId;
+        const userId = req.userId;
 
         const msg = await userService.addMoveiToFavList(movieId, userId);
         //return respose
@@ -31,9 +31,14 @@ const addMoveiToFavList = async (req, res, next) => {
 
 const getFavList = async (req, res, next) => {
     try {
-        const userId  = req.userId;
-        const favList = await userService.getFavList(userId);
-        res.status(200).json(favList );
+        const userId = req.userId;
+
+        const limit = parseInt(req.query.limit) || undefined;
+        const page = parseInt(req.query.page) || 1;
+
+        const favList = await userService.getFavList(userId, limit, page);
+
+        res.status(200).json(favList);
     } catch (err) {
         console.error('Error get fav list');
         next(err);
@@ -44,7 +49,7 @@ const addMoveiToWatctLaterList = async (req, res, next) => {
     try {
 
         const movieId = req.params.id;
-        const userId  = req.userId;
+        const userId = req.userId;
 
         const msg = await userService.addMoveiToWatctLaterList(movieId, userId);
         //return respose
@@ -59,9 +64,14 @@ const addMoveiToWatctLaterList = async (req, res, next) => {
 
 const getWatctLaterList = async (req, res, next) => {
     try {
-        const userId  = req.userId;
-        const watctLater = await userService.getwatctLaterList(userId);
-        res.status(200).json(watctLater );
+        const userId = req.userId;
+
+        const limit = parseInt(req.query.limit) || undefined;
+        const page = parseInt(req.query.page) || 1;
+
+        const watctLater = await userService.getwatctLaterList(userId, limit, page);
+
+        res.status(200).json(watctLater);
     } catch (err) {
         console.error('Error get fav list');
         next(err);

@@ -28,9 +28,15 @@ const addMoveiToFavList = async (movieId, userId) => {
     }
 }
 
-const getFavList = async (userId) => {
+const getFavList = async (userId,limit, page) => {
     try {
-        const user = await User.findById(userId).populate("favMovies",'title image overview tagline');
+        const skip = (page - 1) * limit;
+        const user = await User.findById(userId).populate({
+            path:"favMovies",
+            select:'title image overview tagline',
+            limit,
+            skip
+        });
         return user.favMovies;
     } catch (error) {
         throw error;
@@ -55,9 +61,15 @@ const addMoveiToWatctLaterList = async (movieId, userId) => {
     }
 }
 
-const getwatctLaterList = async (userId) => {
+const getwatctLaterList = async (userId,limit, page) => {
     try {
-        const user = await User.findById(userId).populate("watctLater",'title image overview tagline');
+        const skip = (page - 1) * limit;
+        const user = await User.findById(userId).populate({
+            path:"watctLater",
+            select:'title image overview tagline',
+            limit,
+            skip
+        });
         return user.watctLater;
     } catch (error) {
         throw error;

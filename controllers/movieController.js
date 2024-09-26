@@ -131,6 +131,24 @@ const addMoveiToFavList = async (req, res, next) => {
 
 }
 
+const deleteMovie = async (req, res, next) => {
+    try {
+
+        const movieTitle = req.params.title;
+
+        const movie = await movieService.deleteMovie({title:movieTitle})
+
+        //return respose
+        res.status(200).json({movie, message: "the movie was deleted" });
+
+    } catch (err) {
+        console.error('Error delete movie');
+        next(err);
+    }
+
+}
+
+
 // const editMovieGenre = async (req, res, next) => {
 //     try {
 
@@ -157,5 +175,6 @@ module.exports = {
     getMoviesByCategory,
     addRateToMovie,
     addMoveiToFavList,
-    // editMovieGenre
+    // editMovieGenre,
+    deleteMovie
 }

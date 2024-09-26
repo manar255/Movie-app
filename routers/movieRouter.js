@@ -9,6 +9,7 @@ const uploadFile = require('../meddleware/uploadFile')
 
 router.post('/',uploadFile.single('file'),movieController.addMovie )
 router.get('/movies',movieController.getAllMovies )
+router.delete('/:title',movieController.deleteMovie )
 // router.put('/movies',movieController.editMovieGenre )
 router.get('/category/:category',movieController.getMoviesByCategory)
 router.get('/:id',movieController.getOneMovie)
