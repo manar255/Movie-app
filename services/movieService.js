@@ -51,6 +51,7 @@ const findMovieByQuery = async (query, limit, page) => {
 const updateMovieRate = async (movieId, rate, userId) => {
     try {
         const movie = await Movie.findById(movieId);
+        
         movie.vote_count++;
         movie.vote_average = ((movie.vote_average * (movie.vote_count - 1) + rate) / movie.vote_count).toFixed(3);
         if (movie.vote_users) {
@@ -61,7 +62,7 @@ const updateMovieRate = async (movieId, rate, userId) => {
         }
 
         movie.save();
-        return movie;
+        return {...movie._doc,rating: rate};
     } catch (error) {
         throw error;
     }
