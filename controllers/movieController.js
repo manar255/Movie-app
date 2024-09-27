@@ -98,11 +98,12 @@ const addRateToMovie = async (req, res, next) => {
 
         const { id } = req.params;
         const { rate } = req.body;
+        const userId = req.userId;
 
-        await movieService.updateMovieRate(id, rate);
+        const movie=await movieService.updateMovieRate(id, rate,userId);
 
         //return respose
-        res.status(200).json({ message: 'your rate added successfully' });
+        res.status(200).json({ message: 'your rate added successfully' ,movie});
 
     } catch (err) {
         console.error('Error add movie rate');

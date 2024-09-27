@@ -37,11 +37,18 @@ const findMovieByQuery = async (query, limit, page) => {
     }
 }
 
-const updateMovieRate = async (movieId, rate) => {
+const updateMovieRate = async (movieId, rate,userId) => {
     try {
         const movie = await Movie.findById(movieId);
         movie.vote_count++;
-        movie.vote_average=( (movie.vote_average * (movie.vote_count - 1) + rate) / movie.vote_count ).toFixed(3); ;
+        movie.vote_average=( (movie.vote_average * (movie.vote_count - 1) + rate) / movie.vote_count ).toFixed(3);
+        if(movie.vote_users){
+            movie.vote_users.push({userId,rating:rate}) 
+        }
+        else{
+            movie.vote_users=[{userId,rating:rate}]
+        }
+
         movie.save();
         return movie;
     } catch (error) {
