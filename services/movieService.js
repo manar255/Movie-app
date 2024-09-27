@@ -40,9 +40,10 @@ const findMovieByQuery = async (query, limit, page) => {
 const updateMovieRate = async (movieId, rate) => {
     try {
         const movie = await Movie.findById(movieId);
-        movie.rating.count++;
-        movie.rating.sum += parseInt(rate);
+        movie.vote_count++;
+        movie.vote_average=( (movie.vote_average * (movie.vote_count - 1) + rate) / movie.vote_count ).toFixed(3); ;
         movie.save();
+        return movie;
     } catch (error) {
         throw error;
     }

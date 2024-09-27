@@ -51,11 +51,10 @@ const MovieSchema = new mongoose.Schema({
     keywords:[String],
     vote_average:Number,
     vote_count:Number,
-
-
-
-
-
+    vote_users: [{
+        userId:{type: mongoose.Schema.Types.ObjectId ,ref:'User'},
+        rating: { type: Number, required: true }
+    }]
     
 }, {
     timestamps: true
