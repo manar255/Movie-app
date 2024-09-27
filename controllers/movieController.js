@@ -79,8 +79,9 @@ const getOneMovie = async (req, res, next) => {
     try {
 
         const { id } = req.params;
+        const userId=req.userId;
 
-        const movie = await movieService.findMovieById(id);
+        const movie = await movieService.findMovieById(id,userId);
 
         //return respose
         res.status(200).json(movie);

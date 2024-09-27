@@ -10,10 +10,21 @@ const createNewMovie = async (movie) => {
     }
 }
 
-const findMovieById = async (id) => {
+const findMovieById = async (id, userId) => {
     try {
         const movie = await Movie.findById(id);
-        return { ...movie._doc, rating: (movie._doc.rating.sum / movie._doc.rating.count) };
+        let isRated = false;
+        let rate;
+        if (userId) {
+            if (movie.vote_users) {
+                rate = movie.vote_users.find(u => u.userId.toString() === userId)
+                if (rate) {
+                    isRated = true;
+                }
+            }
+
+        }
+        return { ...movie._doc, rating: (isRated) ? rate.rating : isRated };
     } catch (error) {
         throw error;
     }
@@ -37,16 +48,16 @@ const findMovieByQuery = async (query, limit, page) => {
     }
 }
 
-const updateMovieRate = async (movieId, rate,userId) => {
+const updateMovieRate = async (movieId, rate, userId) => {
     try {
         const movie = await Movie.findById(movieId);
         movie.vote_count++;
-        movie.vote_average=( (movie.vote_average * (movie.vote_count - 1) + rate) / movie.vote_count ).toFixed(3);
-        if(movie.vote_users){
-            movie.vote_users.push({userId,rating:rate}) 
+        movie.vote_average = ((movie.vote_average * (movie.vote_count - 1) + rate) / movie.vote_count).toFixed(3);
+        if (movie.vote_users) {
+            movie.vote_users.push({ userId, rating: rate })
         }
-        else{
-            movie.vote_users=[{userId,rating:rate}]
+        else {
+            movie.vote_users = [{ userId, rating: rate }]
         }
 
         movie.save();
