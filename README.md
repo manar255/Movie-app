@@ -12,6 +12,8 @@ This is the backend API for the Movie Website project, built using Node.js, Expr
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Environment Variables](#environment-variables)
+- [Live Demo](#live-demo)
+- [Frontend Repository](#frontend-repository)
 
 ## Project Overview
 
@@ -41,8 +43,8 @@ To run the backend API locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/movie-website-backend.git
-   cd movie-website-backend
+   git clone https://github.com/manar255/Movie-app.git
+   cd movie-app
    ```
 
 2. **Install dependencies:**
@@ -54,8 +56,12 @@ To run the backend API locally, follow these steps:
    Create a `.env` file in the root directory and add the following variables:
    ```bash
    PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
+   DATABASE=your_mongodb_connection_string
+   DATABASE_PASSWORD=your_mongodb_password
+   SECRET_KEY=your_jwt_secret
+   CLOUDINARY_NAME=your_cloudinary_name
+   CLOUDINARY_API_KEY=your_cloudinary_api_key
+   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
    GOOGLE_CLIENT_ID=your_google_client_id
    GOOGLE_CLIENT_SECRET=your_google_client_secret
    ```
@@ -75,38 +81,52 @@ Once the backend server is running, it will provide several RESTful API endpoint
 
 ### User Authentication
 
-- **POST /api/auth/signup** - Create a new user account.
-- **POST /api/auth/login** - Log in with an email and password.
-- **POST /api/auth/google** - Log in with Google OAuth.
+- **POST /auth/signUp** - Create a new user account.
+- **POST /auth/signIn** - Log in with an email and password.
+- **POST /auth/google** - Log in with Google OAuth.
 
 ### Movies
 
-- **GET /api/movies** - Fetch all movies.
-- **GET /api/movies/:id** - Get details of a specific movie.
-- **POST /api/movies** - Add a new movie (Admin only).
+- **GET /movie/movies** - Fetch all movies.
+- **GET /movies/:id** - Get details of a specific movie.
+- **POST /movie** - Add a new movie (Admin only).
+- **GET /movie/category/:category** - Get movies by category name
+- **PUT /movie//rate/:id** - Edit movie rate
+- **DELET /movie/:title** - delete movie by title
+
 
 ### User Favorites & Watch Later
 
-- **GET /api/users/favorites** - Get the user's favorite movies.
-- **POST /api/users/favorites** - Add a movie to favorites.
-- **GET /api/users/watch-later** - Get the user's watch later list.
-- **POST /api/users/watch-later** - Add a movie to the watch later list.
+- **GET /user/** -get all user data
+- **GET /user/favList** - Get the user's favorite movies.
+- **PUT /user/favList/id** - Add or remove a movie to/from favorites.
+- **GET /user/watctLater** - Get the user's watch later list.
+- **PUT /user/watctLater/:id** - Add or remove a movie to/from the watch later list.
 
-### Ratings
 
-- **POST /api/movies/:id/rate** - Submit a rating for a movie.
-- **GET /api/movies/:id/ratings** - Get all ratings for a movie.
 
 ## Environment Variables
 
 You need to configure the following environment variables in a `.env` file for the backend API to function properly:
 
-- **PORT**: The port the server will run on.
-- **MONGODB_URI**: MongoDB connection string.
-- **JWT_SECRET**: Secret key used to sign and verify JWT tokens.
+- **PORT**: The port the server will run on (e.g., `5000`).
+- **DATABASE**: The MongoDB connection string.
+- **DATABASE_PASSWORD**: Password for your MongoDB database.
+- **SECRET_KEY**: Secret key used to sign and verify JWT tokens.
+- **CLOUDINARY_NAME**: Your Cloudinary account name.
+- **CLOUDINARY_API_KEY**: Cloudinary API key for handling image uploads.
+- **CLOUDINARY_API_SECRET**: Cloudinary API secret for secure operations.
 - **GOOGLE_CLIENT_ID**: Google OAuth client ID.
 - **GOOGLE_CLIENT_SECRET**: Google OAuth client secret.
 
+
+## Live Demo
+
+Check out the live demo of the Movie Website here: [Live Demo Link](https://your-live-demo-url.com)
+
+## Frontend Repository
+
+The frontend of this project is built with Angular. You can find the frontend repository here: [Frontend Repository](https://github.com/mostafafinal/TopMovies.git)
 
 
 
