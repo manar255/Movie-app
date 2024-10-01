@@ -122,7 +122,7 @@ You need to configure the following environment variables in a `.env` file for t
 
 ## Live Demo
 
-Check out the live demo of the Movie Website here: [Live Demo Link](https://your-live-demo-url.com)
+Check out the live demo of the Movie Website here: [Live Demo Link](https://top-movies-topaz.vercel.app/home)
 
 ## Frontend Repository
 
