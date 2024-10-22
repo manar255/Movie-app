@@ -171,7 +171,7 @@ const deleteMovie = async (req, res, next) => {
 // }
 
 module.exports = {
-    addMovie,
+    // addMovie,
     getAllMovies,
     getOneMovie,
     getMoviesByCategory,
