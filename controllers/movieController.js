@@ -3,39 +3,39 @@ const Movie = require('../models/Movie');
 const {uploadImage} = require('../services/cloudinary')
 const movieService = require('../services/movieService')
 
-const addMovie = async (req, res, next) => {
-    try {
-        const { title, date, overview, isReleased, isAdult, original_language, tagline, genres, production_companies, production_countries, spoken_languages, keywords, vote_average, vote_count } = req.body;
-        const file = req.file;
-        // create new movie
-        const movie = await movieService.createNewMovie({
-            title,
-            image:await uploadImage(file.path,"Movie"),
-            date,
-            overview,
-            isReleased:isReleased==="true"?true:false,
-            isAdult:isAdult==="true"?true:false,
-            original_language,
-            tagline,
-            genres,
-            production_companies:JSON.parse(production_companies),
-            production_countries:JSON.parse(production_countries),
-            spoken_languages:JSON.parse(spoken_languages),
-            keywords:JSON.parse(spoken_languages),
-            vote_average,
-            vote_count
-        });
+// const addMovie = async (req, res, next) => {
+//     try {
+//         const { title, date, overview, isReleased, isAdult, original_language, tagline, genres, production_companies, production_countries, spoken_languages, keywords, vote_average, vote_count } = req.body;
+//         const file = req.file;
+//         // create new movie
+//         const movie = await movieService.createNewMovie({
+//             title,
+//             image:await uploadImage(file.path,"Movie"),
+//             date,
+//             overview,
+//             isReleased:isReleased==="true"?true:false,
+//             isAdult:isAdult==="true"?true:false,
+//             original_language,
+//             tagline,
+//             genres,
+//             production_companies:JSON.parse(production_companies),
+//             production_countries:JSON.parse(production_countries),
+//             spoken_languages:JSON.parse(spoken_languages),
+//             keywords:JSON.parse(spoken_languages),
+//             vote_average,
+//             vote_count
+//         });
 
-        //return respose
-        res.status(200).json({ message: 'new movie added successfully' });
-    } catch (err) {
+//         //return respose
+//         res.status(200).json({ message: 'new movie added successfully' });
+//     } catch (err) {
 
-        console.error('Error in add new movie');
-        next(err);
+//         console.error('Error in add new movie');
+//         next(err);
 
-    }
+//     }
 
-}
+// }
 
 const getAllMovies = async (req, res, next) => {
     try {

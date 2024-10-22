@@ -9,7 +9,7 @@ const isAuth = require('../meddleware/isAuth')
 const ifLogin = require('../meddleware/ifLogin')
 
 
-router.post('/', uploadFile.single('file'), movieController.addMovie)
+// router.post('/', uploadFile.single('file'), movieController.addMovie)
 router.get('/movies', movieController.getAllMovies)
 router.delete('/:title', movieController.deleteMovie)
 // router.put('/movies',movieController.editMovieGenre )
